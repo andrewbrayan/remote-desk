@@ -106,7 +106,7 @@ Ejecuta esto **desde Windows**:
 npm run package:windows
 ```
 
-El instalador queda en `apps/agent/release/`. La URL, el token, STUN y TURN se configuran directamente desde la interfaz del agente. Las variables de entorno siguen funcionando como valores iniciales opcionales para instalaciones automatizadas.
+El instalador y el ZIP portátil quedan en `apps/agent/release/`. La URL, el token, STUN y TURN se configuran directamente desde la interfaz del agente. Las variables de entorno siguen funcionando como valores iniciales opcionales para instalaciones automatizadas. Antes de actualizar usa **Cerrar completamente**; si Windows bloquea el instalador, descarga el ZIP portátil, extráelo y ejecuta `Remote Desk Agent.exe` sin instalar.
 
 ## Rendimiento esperado
 

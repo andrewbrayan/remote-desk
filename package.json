@@ -9,7 +9,8 @@
     "build": "npm run build -w @remote-desk/web && npm run build -w @remote-desk/api",
     "start": "npm run start -w @remote-desk/api",
     "test": "npm run test -w @remote-desk/api",
-    "package:windows": "npm run package:windows -w @remote-desk/agent"
+    "package:windows": "npm run package:windows -w @remote-desk/agent",
+    "package:windows:portable": "npm run package:windows:portable -w @remote-desk/agent"
   },
   "devDependencies": {
     "concurrently": "^9.2.1"

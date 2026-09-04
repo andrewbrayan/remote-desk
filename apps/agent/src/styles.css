@@ -8,6 +8,7 @@ h2 { margin: 0 0 14px; font-size: 16px; }
 label { display: block; margin: 10px 0 6px; font-weight: 650; font-size: 13px; } select, input { width: 100%; padding: 10px; border: 1px solid #30394b; border-radius: 8px; color: white; background: #080c13; outline: none; }
 select:focus, input:focus { border-color: #637cff; }
 button { width: 100%; margin-top: 14px; padding: 11px; border: 0; border-radius: 8px; color: white; background: #4d6bfe; cursor: pointer; font-weight: 650; } button:disabled { opacity: .55; }
+button.secondary { margin-top: 8px; color: #c3cada; background: #252c39; }
 details { margin-top: 14px; padding: 10px; border-radius: 8px; background: #0b1018; } summary { color: #aeb8cc; cursor: pointer; font-size: 13px; }.columns { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
 .error { min-height: 18px; margin-top: 8px; color: #ff8792; font-size: 12px; }.compact { margin-bottom: 0; }
 .help { color: #8e99ad; font-size: 13px; line-height: 1.5; margin: 9px 0 0; }.pill { display: inline-block; margin-top: 10px; padding: 6px 9px; border-radius: 20px; color: #b7c0d3; background: #252c39; font-size: 12px; }.pill.live { color: #71e7ad; background: #17372c; }

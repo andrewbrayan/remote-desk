@@ -9,6 +9,14 @@ app.commandLine.appendSwitch("enable-features", "WebRTCPipeWireCapturer");
 
 let inputBridge;
 
+function exitCompletely() {
+  if (inputBridge) {
+    inputBridge.kill();
+    inputBridge = undefined;
+  }
+  app.exit(0);
+}
+
 function parseIceServers(value) {
   try {
     const servers = typeof value === "string" ? JSON.parse(value) : value;
@@ -107,11 +115,12 @@ app.whenReady().then(() => {
   ipcMain.on("input", (_event, value) => {
     if (inputBridge?.stdin.writable) inputBridge.stdin.write(`${JSON.stringify(value)}\n`);
   });
+  ipcMain.on("app:quit", exitCompletely);
   ipcMain.handle("config:load", loadConfig);
   ipcMain.handle("config:save", (_event, value) => saveConfig(value));
   startInputBridge();
   createWindow();
 });
 
-app.on("window-all-closed", () => app.quit());
+app.on("window-all-closed", exitCompletely);
 app.on("before-quit", () => inputBridge?.kill());

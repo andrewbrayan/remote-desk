@@ -21,6 +21,7 @@ async function start() {
   config = await ipcRenderer.invoke("config:load");
   fillSettings();
   settingsEl.addEventListener("submit", saveSettings);
+  document.getElementById("quit").addEventListener("click", () => ipcRenderer.send("app:quit"));
   await loadAudioOutputs();
   if (!config.agentToken) {
     statusEl.textContent = "Configura la conexión";
