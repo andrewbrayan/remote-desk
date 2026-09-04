@@ -18,7 +18,9 @@ npm run dev:server
 
 Edita `.env` antes de usarlo. Como mínimo cambia `WEB_PASSWORD`, `JWT_SECRET` y `AGENT_TOKEN`. Abre `http://localhost:5173` para la web.
 
-En el PC Windows, copia el proyecto y el mismo `.env`, cambia `API_URL` por la URL de la API y ejecuta:
+En el PC Windows puedes instalar el `.exe` publicado en GitHub Releases. Al abrirlo, completa **URL de la API** y **Token del agente**, y pulsa **Guardar y conectar**. El agente guarda la configuración en el perfil local de Windows; ya no es necesario crear variables de entorno.
+
+Para desarrollo también puedes ejecutar:
 
 ```powershell
 npm install
@@ -102,7 +104,7 @@ Ejecuta esto **desde Windows**:
 npm run package:windows
 ```
 
-El instalador queda en `apps/agent/release/`. Antes de abrir el agente instalado, define `API_URL`, `AGENT_TOKEN` y `RTC_ICE_SERVERS` como variables de entorno de Windows. Cierra y vuelve a abrir sesión si Windows aún no las refleja.
+El instalador queda en `apps/agent/release/`. La URL, el token, STUN y TURN se configuran directamente desde la interfaz del agente. Las variables de entorno siguen funcionando como valores iniciales opcionales para instalaciones automatizadas.
 
 ## Rendimiento esperado
 

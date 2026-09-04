@@ -11,11 +11,34 @@
     <div class="brand"><span>RD</span><div><h1>Remote Desk Agent</h1><p>PC que será controlado</p></div></div>
     <section><div class="row"><strong>Servidor</strong><span id="server"></span></div><div class="row"><strong>Estado</strong><span id="status">Iniciando…</span></div></section>
     <section>
+      <form id="settings">
+        <h2>Conexión</h2>
+        <label for="apiUrl">URL de la API</label>
+        <input id="apiUrl" name="apiUrl" type="url" placeholder="https://api-remote.tudominio.com" required />
+        <label for="agentToken">Token del agente</label>
+        <input id="agentToken" name="agentToken" type="password" placeholder="El mismo AGENT_TOKEN de la API" required />
+        <details>
+          <summary>Configuración avanzada de red</summary>
+          <label for="stunUrl">Servidor STUN</label>
+          <input id="stunUrl" name="stunUrl" placeholder="stun:stun.l.google.com:19302" />
+          <label for="turnUrl">Servidor TURN (opcional)</label>
+          <input id="turnUrl" name="turnUrl" placeholder="turn:turn.tudominio.com:3478" />
+          <div class="columns">
+            <label>Usuario TURN<input id="turnUsername" name="turnUsername" /></label>
+            <label>Contraseña TURN<input id="turnCredential" name="turnCredential" type="password" /></label>
+          </div>
+          <p class="help">TURN solo es necesario si no conecta desde otra red. STUN es suficiente para la primera prueba.</p>
+        </details>
+        <div id="settingsError" class="error"></div>
+        <button id="save" type="submit">Guardar y conectar</button>
+      </form>
+    </section>
+    <section>
       <label for="output">Salida para el micrófono remoto</label>
       <select id="output"></select>
       <p class="help">Para Teams, selecciona <b>CABLE Input</b> aquí y <b>CABLE Output</b> como micrófono dentro de Teams.</p>
     </section>
-    <section><strong>Calidad</strong><p class="help">Captura adaptable: intenta 1080p a 30 fps y WebRTC reduce calidad automáticamente si la red lo necesita.</p><div id="session" class="pill">Sin sesión activa</div></section>
+    <section class="compact"><strong>Calidad</strong><p class="help">Captura adaptable: intenta 1080p a 30 fps y reduce calidad si la red lo necesita.</p><div id="session" class="pill">Sin sesión activa</div></section>
     <audio id="remoteAudio" autoplay></audio>
   </main>
   <script src="renderer.cjs"></script>
