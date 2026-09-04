@@ -40,6 +40,8 @@ Windows necesita un cable de audio virtual; esta primera versión usa cualquier 
 
 Así, la voz capturada en el navegador llega por WebRTC, se reproduce en `CABLE Input` y Teams la recibe desde `CABLE Output`. Usa audífonos en ambos extremos para evitar eco.
 
+Si Windows muestra `Could not start audio source`, verifica que exista un dispositivo de salida predeterminado activo y prueba temporalmente con los altavoces integrados/Realtek en lugar de una salida USB. El agente reintenta automáticamente con video solamente para que el fallo de audio no bloquee el control remoto.
+
 ## Uso por Internet
 
 La web debe publicarse con **HTTPS** para que el navegador permita usar el micrófono. La API sirve también el build de la web, así que en producción se despliega un solo servicio.

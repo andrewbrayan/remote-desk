@@ -100,9 +100,9 @@ function createWindow() {
 }
 
 app.whenReady().then(() => {
-  session.defaultSession.setDisplayMediaRequestHandler(async (_request, callback) => {
+  session.defaultSession.setDisplayMediaRequestHandler(async (request, callback) => {
     const sources = await desktopCapturer.getSources({ types: ["screen"], thumbnailSize: { width: 0, height: 0 } });
-    callback({ video: sources[0], audio: "loopback" });
+    callback({ video: sources[0], ...(request.audioRequested ? { audio: "loopback" } : {}) });
   });
   ipcMain.on("input", (_event, value) => {
     if (inputBridge?.stdin.writable) inputBridge.stdin.write(`${JSON.stringify(value)}\n`);

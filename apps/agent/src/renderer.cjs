@@ -7,6 +7,7 @@ let screenStream;
 let controllerId;
 let config;
 let queuedCandidates = [];
+let systemAudioAvailable = true;
 
 const statusEl = document.getElementById("status");
 const sessionEl = document.getElementById("session");
@@ -118,10 +119,16 @@ async function createSession(id) {
   controllerId = id;
   statusEl.textContent = "Compartiendo escritorio…";
   try {
-    screenStream = await navigator.mediaDevices.getDisplayMedia({
-      video: { width: { ideal: 1920, max: 1920 }, height: { ideal: 1080, max: 1080 }, frameRate: { ideal: 30, max: 30 } },
-      audio: true,
-    });
+    const videoConstraints = { width: { ideal: 1920, max: 1920 }, height: { ideal: 1080, max: 1080 }, frameRate: { ideal: 30, max: 30 } };
+    systemAudioAvailable = true;
+    try {
+      screenStream = await navigator.mediaDevices.getDisplayMedia({ video: videoConstraints, audio: true });
+    } catch (audioError) {
+      console.warn("Desktop audio capture failed; retrying with video only", audioError);
+      systemAudioAvailable = false;
+      statusEl.textContent = "Audio del PC no disponible; conectando solo video…";
+      screenStream = await navigator.mediaDevices.getDisplayMedia({ video: videoConstraints, audio: false });
+    }
     peer = new RTCPeerConnection({ iceServers: config.iceServers });
     screenStream.getTracks().forEach((track) => {
       const sender = peer.addTrack(track, screenStream);
@@ -143,7 +150,11 @@ async function createSession(id) {
     };
     peer.onicecandidate = ({ candidate }) => candidate && socket.emit("signal", { target: controllerId, data: { candidate: candidate.toJSON() } });
     peer.onconnectionstatechange = () => {
-      if (peer?.connectionState === "connected") { statusEl.textContent = "Sesión activa"; sessionEl.textContent = "Control remoto activo"; sessionEl.classList.add("live"); }
+      if (peer?.connectionState === "connected") {
+        statusEl.textContent = systemAudioAvailable ? "Sesión activa" : "Sesión activa · sin audio del PC";
+        sessionEl.textContent = systemAudioAvailable ? "Control remoto activo" : "Control activo · revisa salida de audio de Windows";
+        sessionEl.classList.add("live");
+      }
       if (["failed", "closed"].includes(peer?.connectionState)) closeSession();
     };
     const offer = await peer.createOffer();
