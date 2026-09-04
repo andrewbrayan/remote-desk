@@ -9,7 +9,7 @@ type InputEvent =
   | { type: "wheel"; delta: number }
   | { type: "key"; key: string; code: string; down: boolean; ctrl: boolean; alt: boolean; shift: boolean; meta: boolean };
 
-const API_URL = import.meta.env.VITE_API_URL ?? window.location.origin;
+const API_URL = window.__REMOTE_DESK_CONFIG__?.apiUrl || import.meta.env.VITE_API_URL || window.location.origin;
 
 export function App() {
   const [token, setToken] = useState(() => sessionStorage.getItem("remote-token") ?? "");

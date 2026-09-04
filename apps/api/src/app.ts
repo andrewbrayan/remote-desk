@@ -1,4 +1,5 @@
 import crypto from "node:crypto";
+import fs from "node:fs";
 import path from "node:path";
 import { fileURLToPath } from "node:url";
 import cors from "cors";
@@ -37,10 +38,9 @@ export function createApp() {
   );
 
   const webDist = path.resolve(path.dirname(fileURLToPath(import.meta.url)), "../../web/dist");
-  app.use(express.static(webDist));
-  app.get("/{*path}", (_req, res, next) => {
-    if (!process.env.NODE_ENV || process.env.NODE_ENV === "development") return next();
-    res.sendFile(path.join(webDist, "index.html"));
-  });
+  if (process.env.SERVE_WEB !== "false" && fs.existsSync(webDist)) {
+    app.use(express.static(webDist));
+    app.get("/{*path}", (_req, res) => res.sendFile(path.join(webDist, "index.html")));
+  }
   return app;
 }

@@ -40,9 +40,46 @@ Así, la voz capturada en el navegador llega por WebRTC, se reproduce en `CABLE 
 
 ## Uso por Internet
 
-La web debe publicarse con **HTTPS** para que el navegador permita usar el micrófono. Ejecuta primero:
+La web debe publicarse con **HTTPS** para que el navegador permita usar el micrófono. La API sirve también el build de la web, así que en producción se despliega un solo servicio.
+
+### Despliegue en Coolify con Dockerfiles separados
+
+Crea dos recursos **Dockerfile** desde el mismo repositorio y la rama `main`. Mantén `/` como directorio base/contexto de build.
+
+**API**
+
+- Dockerfile: `/apps/api/Dockerfile`
+- Puerto: `8787`
+- Dominio sugerido: `https://api-remote.tudominio.com`
+- Health check: `/api/health`
+- Variables obligatorias: `WEB_USERNAME`, `WEB_PASSWORD`, `JWT_SECRET`, `AGENT_TOKEN` y `RTC_ICE_SERVERS`
+
+**Web**
+
+- Dockerfile: `/apps/web/Dockerfile`
+- Puerto: `80`
+- Dominio sugerido: `https://remote.tudominio.com`
+- Health check: `/healthz`
+- Variable obligatoria: `API_URL=https://api-remote.tudominio.com` (sin `/` al final)
+
+La web obtiene `API_URL` al arrancar el contenedor, por lo que cambiar el dominio en Coolify no requiere reconstruir el frontend. Coolify debe generar certificados HTTPS para ambos dominios. Socket.IO se conecta directamente al dominio de la API y ya admite WebSocket con fallback a polling.
+
+En el agente Windows configura exactamente el mismo dominio y secretos:
+
+```env
+API_URL=https://api-remote.tudominio.com
+AGENT_TOKEN=el-mismo-token-de-la-api
+RTC_ICE_SERVERS=[{"urls":"stun:stun.l.google.com:19302"}]
+```
+
+Para redes donde STUN no sea suficiente, agrega TURN al `RTC_ICE_SERVERS` tanto de la API como del agente.
+
+### Despliegue sin Docker
+
+También puedes ejecutar Node directamente:
 
 ```bash
+npm ci
 npm run build
 NODE_ENV=production npm start
 ```
