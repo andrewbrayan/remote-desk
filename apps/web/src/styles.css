@@ -1,0 +1,23 @@
+:root { font-family: Inter, ui-sans-serif, system-ui, sans-serif; color: #e8edf8; background: #090c12; font-synthesis: none; }
+* { box-sizing: border-box; }
+body { margin: 0; min-width: 320px; min-height: 100vh; }
+button, input { font: inherit; }
+button { border: 0; border-radius: 8px; padding: 9px 15px; color: white; background: #4d6bfe; cursor: pointer; }
+button:disabled { opacity: .45; cursor: not-allowed; }
+button.secondary { background: #252b38; } button.ghost { background: transparent; color: #aeb8cc; }
+.logo { display: inline-grid; place-items: center; width: 32px; height: 32px; margin-right: 10px; border-radius: 9px; background: linear-gradient(135deg,#7288ff,#7044cc); font-weight: 800; }
+.logo.big { width: 54px; height: 54px; margin: 0; font-size: 20px; }
+.login { min-height: 100vh; display: grid; place-items: center; background: radial-gradient(circle at 50% 15%,#1d2744,#090c12 50%); }
+.login form { width: min(390px, calc(100vw - 32px)); padding: 34px; border: 1px solid #252b38; border-radius: 16px; background: #111620; box-shadow: 0 25px 70px #0008; }
+.login h1 { margin: 16px 0 4px; }.login p { color: #8994a9; margin: 0 0 24px; }
+.login label { display: grid; gap: 7px; margin: 14px 0; color: #aeb8cc; font-size: 14px; }
+.login input { width: 100%; padding: 11px; color: white; background: #090d14; border: 1px solid #303849; border-radius: 8px; outline: none; }
+.login input:focus { border-color: #637cff; }.login button { width: 100%; margin-top: 10px; }.error { color: #ff8792; font-size: 14px; }
+.desk { height: 100vh; display: grid; grid-template-rows: 58px 1fr; outline: 0; }
+header { display: flex; justify-content: space-between; align-items: center; padding: 0 18px; background: #111620; border-bottom: 1px solid #252b38; }
+header > div { display: flex; align-items: center; }.actions { gap: 11px; color: #aeb8cc; font-size: 13px; }.actions label { display: flex; gap: 5px; align-items: center; }
+.dot { width: 8px; height: 8px; border-radius: 50%; background: #798194; }.dot.online { background: #3bdd91; box-shadow: 0 0 10px #3bdd91aa; }
+.viewer { position: relative; min-height: 0; display: grid; place-items: center; overflow: hidden; background: #05070a; }
+.viewer video { width: 100%; height: 100%; object-fit: contain; cursor: default; }
+.empty { position: absolute; color: #5f687a; pointer-events: none; }.status { position: absolute; bottom: 12px; left: 12px; padding: 6px 10px; border-radius: 7px; background: #070a0dcc; color: #b8c2d6; font-size: 12px; pointer-events: none; }
+@media (max-width: 800px) { header { height: auto; padding: 10px; align-items: flex-start; }.desk { grid-template-rows: auto 1fr; }.actions { justify-content: flex-end; flex-wrap: wrap; }.actions label { display: none; } header strong { display: none; } }

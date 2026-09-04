@@ -1,0 +1,29 @@
+{
+  "name": "@remote-desk/agent",
+  "version": "0.1.0",
+  "description": "Agente Windows para Remote Desk",
+  "author": "Remote Desk",
+  "private": true,
+  "main": "src/main.cjs",
+  "scripts": {
+    "dev": "electron .",
+    "package:windows": "electron-builder --win nsis --x64"
+  },
+  "dependencies": {
+    "dotenv": "^17.2.2",
+    "socket.io-client": "^4.8.1"
+  },
+  "devDependencies": {
+    "electron": "37.10.3",
+    "electron-builder": "26.15.3"
+  },
+  "build": {
+    "appId": "com.remotedesk.agent",
+    "productName": "Remote Desk Agent",
+    "directories": { "output": "release" },
+    "files": ["src/**/*", "package.json"],
+    "extraResources": [{ "from": "resources/input-bridge.ps1", "to": "input-bridge.ps1" }],
+    "win": { "target": "nsis" },
+    "nsis": { "oneClick": true, "perMachine": false }
+  }
+}

@@ -1,0 +1,23 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Remote Desk Agent</title>
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <main>
+    <div class="brand"><span>RD</span><div><h1>Remote Desk Agent</h1><p>PC que será controlado</p></div></div>
+    <section><div class="row"><strong>Servidor</strong><span id="server"></span></div><div class="row"><strong>Estado</strong><span id="status">Iniciando…</span></div></section>
+    <section>
+      <label for="output">Salida para el micrófono remoto</label>
+      <select id="output"></select>
+      <p class="help">Para Teams, selecciona <b>CABLE Input</b> aquí y <b>CABLE Output</b> como micrófono dentro de Teams.</p>
+    </section>
+    <section><strong>Calidad</strong><p class="help">Captura adaptable: intenta 1080p a 30 fps y WebRTC reduce calidad automáticamente si la red lo necesita.</p><div id="session" class="pill">Sin sesión activa</div></section>
+    <audio id="remoteAudio" autoplay></audio>
+  </main>
+  <script src="renderer.cjs"></script>
+</body>
+</html>

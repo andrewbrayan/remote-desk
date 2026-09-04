@@ -1,0 +1,8 @@
+:root { font-family: Inter, system-ui, sans-serif; color: #e7ecf7; background: #090c12; }
+* { box-sizing: border-box; } body { margin: 0; } main { padding: 26px; }
+.brand { display: flex; gap: 14px; align-items: center; margin-bottom: 24px; }.brand > span { display: grid; place-items: center; width: 52px; height: 52px; border-radius: 14px; background: linear-gradient(135deg,#7187ff,#7147ca); font-weight: 800; }
+h1 { font-size: 21px; margin: 0 0 3px; }.brand p { margin: 0; color: #8d98ac; }
+section { margin: 12px 0; padding: 16px; border: 1px solid #272e3b; border-radius: 12px; background: #111620; }
+.row { display: flex; justify-content: space-between; gap: 15px; margin: 5px 0; }.row span { color: #aeb8cc; overflow: hidden; text-overflow: ellipsis; }
+label { display: block; margin-bottom: 8px; font-weight: 650; } select { width: 100%; padding: 10px; border: 1px solid #30394b; border-radius: 8px; color: white; background: #080c13; }
+.help { color: #8e99ad; font-size: 13px; line-height: 1.5; margin: 9px 0 0; }.pill { display: inline-block; margin-top: 10px; padding: 6px 9px; border-radius: 20px; color: #b7c0d3; background: #252c39; font-size: 12px; }.pill.live { color: #71e7ad; background: #17372c; }
